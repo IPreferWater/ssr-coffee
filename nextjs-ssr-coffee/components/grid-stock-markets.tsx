@@ -13,8 +13,8 @@ type StockMarketProps = {
 export const GridStockMarket = ({ stocks }: GridStockMarketProps) => 
 <div className="">
   <div className='grid grid-cols-3 text-center p-4 m-4'>
-  {stocks.map((stock) => (
-        <div className='shadow-lg rounded-lg overflow-hidden'>
+  {stocks.map((stock, index) => (
+        <div key={index} className='shadow-lg rounded-lg overflow-hidden'>
           <h2>{stock.title}</h2>
           <div>          
           {stock.isUp ? '+' : '-' } {stock.amount}

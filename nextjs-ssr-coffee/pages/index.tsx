@@ -1,17 +1,17 @@
 import Link from 'next/link'
 import Layout from '../components/Layout'
-import { getSortedPostsData } from '../pages/api/blog'
 import {IconLogo} from '../components/icon-logo';
 import {RadarChart} from '../components/radar-chart';
 import {LineChart} from '../components/line-chart';
 import {PieChart} from '../components/pie-chart';
 import {GridStockMarket} from '../components/grid-stock-markets';
+import { request } from 'http';
 
 
 
 
 //const IndexPage = () => (
-  export default function IndexPage({ allPostsData }) {
+  export default function IndexPage() {
 
     const dataRadarProduction = {
       labels: ['Columbia', 'Brazil', 'Other America ','Vietnam' ,  'Other Asia and Pacific','Africa'],
@@ -192,11 +192,16 @@ import {GridStockMarket} from '../components/grid-stock-markets';
   </Layout>)
 }
 
-export async function getStaticProps() {
-  const allPostsData = getSortedPostsData()
+//export async function getServerSideProps() {
+  export async function getStaticProps() {
+
+  //const event = await request(`localhost:3002/report`); 
+  const res = await fetch(`http:127.0.0.1:3002/report`)
+  const data = await res.json()
+  console.log(data);
   return {
     props: {
-      allPostsData
+       
     }
   }
 }
