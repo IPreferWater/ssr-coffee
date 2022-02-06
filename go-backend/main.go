@@ -29,6 +29,16 @@ type salesByCountriesData struct {
 
 func main() {
 
+	
+
+
+	r := gin.Default()
+	r.GET("report", getReport)
+	r.Run(":3002")
+}
+
+func getReport(c *gin.Context) {
+
 	var report report
 	var wg sync.WaitGroup
 	wg.Add(2)
@@ -39,17 +49,6 @@ func main() {
 
 	fmt.Println(report)
 
-
-	/*r := gin.Default()
-	r.GET("report", getReport)
-	r.Run(":3002")*/
-}
-
-func getReport(c *gin.Context) {
-
-	report := report{
-		Ok: "todo",
-	}
 	c.JSON(http.StatusAccepted, report)
 
 }
