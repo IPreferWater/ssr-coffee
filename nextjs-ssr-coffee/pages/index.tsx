@@ -1,16 +1,10 @@
-import Link from 'next/link'
 import Layout from '../components/Layout'
 import {IconLogo} from '../components/icon-logo';
 import {RadarChart} from '../components/radar-chart';
 import {LineChart} from '../components/line-chart';
 import {PieChart} from '../components/pie-chart';
 import {GridStockMarket} from '../components/grid-stock-markets';
-import { request } from 'http';
 
-
-
-
-//const IndexPage = () => (
   export default function IndexPage() {
 
     const dataRadarProduction = {
@@ -144,13 +138,13 @@ import { request } from 'http';
 
     <div className='flex flex-row'>
     <div className='w-full sm:w-1/2'>
-      <h2>buy</h2>
+      <h2>purchase of bags(60kg) by countries</h2>
     <RadarChart data={dataRadarProduction}/>
     
     </div>
 
     <div className='w-full sm:w-1/2'>
-      <h2>buy</h2>
+    <h2>sales of bags(60kg) by countries</h2>
       <RadarChart data={dataRadarSales}/>
     </div>
     </div>
@@ -192,17 +186,12 @@ import { request } from 'http';
   </Layout>)
 }
 
-//export async function getServerSideProps() {
-  export async function getStaticProps() {
-
-  //const event = await request(`localhost:3002/report`); 
+export async function getServerSideProps() {
   const res = await fetch(`http:127.0.0.1:3002/report`)
   const data = await res.json()
-  console.log(data);
   return {
     props: {
-       
+      data
     },
-    //revalidate: 5
   }
 }
